@@ -32,24 +32,10 @@ document.querySelectorAll('.reveal').forEach((element) => observer.observe(eleme
 
 const form = document.getElementById('contactForm');
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const data = new FormData(form);
-  const subject = encodeURIComponent('Novo pedido de orçamento - SG Websites');
-  const body = encodeURIComponent([
-    'Novo pedido de orçamento',
-    '',
-    `Nome: ${data.get('nome')}`,
-    `Empresa: ${data.get('empresa') || 'Não informado'}`,
-    `E-mail: ${data.get('email')}`,
-    `Telefone: ${data.get('telefone') || 'Não informado'}`,
-    '',
-    'Mensagem:',
-    data.get('mensagem')
-  ].join('\n'));
-
-  window.location.href = `mailto:bernard0544678@gmail.com?subject=${subject}&body=${body}`;
+form.addEventListener('submit', () => {
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.innerHTML = 'Enviando solicitação...';
 });
 
 document.getElementById('year').textContent = new Date().getFullYear();
